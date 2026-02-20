@@ -9,7 +9,7 @@ Component_Type :: union {
 	Button,
 }
 
-// `draw` draws the component and executes its function if clicked
+// `draw` draws the component if visible and executes its function if clicked
 draw :: proc(c: ^Component) {
 	if !c.visible do return
 
