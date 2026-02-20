@@ -29,28 +29,30 @@ main :: proc() {
 
 	append(
 		&app.components,
-		component.Component(
-			component.Button {
+		component.Component {
+			type = component.Button {
 				rect = {100, 100, 250, 50},
 				color = rl.BLACK,
 				hover_color = rl.LIGHTGRAY,
 				label = "Click me!",
 				execute = execute_one,
 			},
-		),
+			visible = true,
+		},
 	)
 
 	append(
 		&app.components,
-		component.Component(
-			component.Button {
+		component.Component {
+			type = component.Button {
 				rect = {100, 200, 250, 50},
 				color = rl.BLACK,
 				hover_color = rl.LIGHTGRAY,
 				label = "Another button!",
 				execute = execute_two,
 			},
-		),
+			visible = false,
+		},
 	)
 
 	for !rl.WindowShouldClose() {

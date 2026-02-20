@@ -1,16 +1,23 @@
 package component
 
-Component :: union {
+Component :: struct {
+	type:    Component_Type,
+	visible: bool,
+}
+
+Component_Type :: union {
 	Button,
 }
 
 // `draw` draws the component and executes its function if clicked
 draw :: proc(c: ^Component) {
-	switch &val in c {
+	if !c.visible do return
+
+	switch &type in c.type {
 	case Button:
-		button_draw(&val)
-		if button_is_clicked(&val) && val.execute != nil {
-			val.execute()
+		button_draw(&type)
+		if button_is_clicked(&type) && type.execute != nil {
+			type.execute()
 		}
 	}
 }
