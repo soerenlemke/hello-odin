@@ -1,17 +1,10 @@
 package main
 
+import "application"
+import ui_component "application/ui/component"
+import ui_renderer "application/ui/renderer"
 import "core:fmt"
-import component "ui/component"
-import "ui/renderer"
 import rl "vendor:raylib"
-
-window_width :: 1280
-window_height :: 720
-
-App :: struct {
-	bg_color:   rl.Color,
-	components: [dynamic]component.Component,
-}
 
 execute_one :: proc() {
 	fmt.printfln("Executed one")
@@ -22,17 +15,23 @@ execute_two :: proc() {
 }
 
 main :: proc() {
-	app: App
-	app.bg_color = rl.BLACK
-
-	rl.InitWindow(window_width, window_height, "Hellope")
+	app := application.Application {
+		window = application.Application_Window {
+			width = 1280,
+			height = 720,
+			title = "Hellope",
+			bg_color = rl.BLACK,
+		},
+		fps = 60,
+	}
+	application.setup(&app)
 
 	append(
 		&app.components,
-		component.Component {
-			type = component.Label {
+		ui_component.Component {
+			type = ui_component.Label {
 				text = "menu",
-				pos_x = window_width / 2 - 30,
+				pos_x = app.window.width / 2 - 30,
 				pos_y = 50,
 				font_size = 30,
 				color = rl.WHITE,
@@ -43,9 +42,9 @@ main :: proc() {
 
 	append(
 		&app.components,
-		component.Component {
-			type = component.Button {
-				rect = {window_width / 2 - 125, 100, 250, 50},
+		ui_component.Component {
+			type = ui_component.Button {
+				rect = {f32(app.window.width) / 2 - 125, 100, 250, 50},
 				color = rl.GRAY,
 				hover_color = rl.LIGHTGRAY,
 				label = "Click me!",
@@ -57,9 +56,9 @@ main :: proc() {
 
 	append(
 		&app.components,
-		component.Component {
-			type = component.Button {
-				rect = {window_width / 2 - 125, 200, 250, 50},
+		ui_component.Component {
+			type = ui_component.Button {
+				rect = {f32(app.window.width) / 2 - 125, 200, 250, 50},
 				color = rl.GRAY,
 				hover_color = rl.LIGHTGRAY,
 				label = "Another button!",
@@ -71,13 +70,12 @@ main :: proc() {
 
 	for !rl.WindowShouldClose() {
 		rl.BeginDrawing()
-		rl.ClearBackground(app.bg_color)
+		rl.ClearBackground(app.window.bg_color)
 
-		renderer.draw(&app.components)
+		ui_renderer.draw(&app.components)
 
 		rl.EndDrawing()
 	}
 
-	delete(app.components)
-	rl.CloseWindow()
+	application.close(&app)
 }

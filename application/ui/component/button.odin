@@ -18,7 +18,11 @@ button_draw :: proc(b: ^Button) {
 	rl.DrawRectangleRec(b.rect, color)
 
 	// TODO: center text inside buttons
-	rl.DrawText(b.label, i32(b.rect.x + 10), i32(b.rect.y + 15), 20, rl.WHITE)
+	len := len(b.label)
+	x_pos := b.rect.x + b.rect.width / 2 - f32(len) / 2
+
+	// (text: cstring, posX, posY: c.int, fontSize: c.int, color: Color)
+	rl.DrawText(b.label, i32(x_pos), i32(b.rect.y + 15), 20, rl.WHITE)
 }
 
 button_is_clicked :: proc(b: ^Button) -> bool {
