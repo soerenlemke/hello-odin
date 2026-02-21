@@ -1,6 +1,6 @@
 package application
 
-import component "ui/component"
+import component "ui"
 import rl "vendor:raylib"
 
 Application :: struct {

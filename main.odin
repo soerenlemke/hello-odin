@@ -1,7 +1,7 @@
 package main
 
 import "application"
-import ui_component "application/ui/component"
+import ui "application/ui"
 import "core:fmt"
 import rl "vendor:raylib"
 
@@ -27,8 +27,8 @@ main :: proc() {
 
 	append(
 		&app.components,
-		ui_component.Component {
-			type = ui_component.Label {
+		ui.Component {
+			type = ui.Label {
 				text = "menu",
 				pos_x = app.window.width / 2 - 30,
 				pos_y = 50,
@@ -41,8 +41,8 @@ main :: proc() {
 
 	append(
 		&app.components,
-		ui_component.Component {
-			type = ui_component.Button {
+		ui.Component {
+			type = ui.Button {
 				rect = {f32(app.window.width) / 2 - 125, 100, 250, 50},
 				color = rl.GRAY,
 				hover_color = rl.LIGHTGRAY,
@@ -55,8 +55,8 @@ main :: proc() {
 
 	append(
 		&app.components,
-		ui_component.Component {
-			type = ui_component.Button {
+		ui.Component {
+			type = ui.Button {
 				rect = {f32(app.window.width) / 2 - 125, 200, 250, 50},
 				color = rl.GRAY,
 				hover_color = rl.LIGHTGRAY,
@@ -73,7 +73,7 @@ main :: proc() {
 
 		// TODO: a global renderer should draw the active scene
 		for &comp in app.components {
-			ui_component.draw(&comp)
+			ui.draw(&comp)
 		}
 
 		rl.EndDrawing()

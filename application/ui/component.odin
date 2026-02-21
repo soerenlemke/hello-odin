@@ -1,4 +1,4 @@
-package component
+package ui
 
 Component :: struct {
 	// TODO: add id, z index, enabled?
