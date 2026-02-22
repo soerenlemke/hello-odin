@@ -73,8 +73,8 @@ Build and run tasks are pre-configured via `.vscode/tasks.json`.
     "args": "Odin Run"
   }
 ]
-` `` 
 
-> **Note:** `Ctrl+B` overrides the default VS Code sidebar toggle.
+**Note:**
+> `Ctrl+B` overrides the default VS Code sidebar toggle.
 > Use `Ctrl+Shift+B` instead if you want to keep that shortcut — it runs the default build task automatically.
 ```
